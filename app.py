@@ -4,10 +4,10 @@ import streamlit as st
 import torch
 import numpy as np
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
-from datasets import Dataset
+# from datasets import Dataset
 import json
 from typing import List, Dict
-from torch.utils.data import DataLoader
+# from torch.utils.data import DataLoader
 import re
 
 # ---------------------------
@@ -55,43 +55,68 @@ def load_model_and_tokenizer(model_path: str):
     id2label_map = normalize_id2label(raw_id2label)
     return tokenizer, model, id2label_map
 
+def batch_predict(texts, tokenizer, model, id2label_map):
+    enc = tokenizer(
+        texts,
+        padding=True,
+        truncation=True,
+        return_tensors="pt"
+    )
 
-def batch_predict(texts: List[str], tokenizer, model, id2label_map: Dict[int, str], batch_size=16):
-    ds = Dataset.from_dict({"text": texts})
-
-    def preprocess(batch):
-        return tokenizer(batch["text"], truncation=True, padding="max_length")
-
-    tokenized = ds.map(preprocess, batched=True)
-    tokenized = tokenized.remove_columns(["text"])
-    tokenized.set_format(type="torch", columns=["input_ids", "attention_mask"])
-
-    # mapping from dataset label string -> emotion name
-    emotion_names = {
-        "0": "sadness",
-        "1": "joy",
-        "2": "love",
-        "3": "anger",
-        "4": "fear",
-        "5": "surprise"
-    }
-    
-    preds, probs = [], []
+    enc = {k: v.to(DEVICE) for k, v in enc.items()}
 
     with torch.no_grad():
-        for batch in DataLoader(tokenized, batch_size=batch_size):
-            batch = {k: v.to(DEVICE) for k, v in batch.items()}
-            logits = model(**batch).logits
-            soft = torch.softmax(logits, dim=-1)
-            pred_ids = torch.argmax(soft, dim=-1).cpu().numpy()
+        outputs = model(**enc)
+        logits = outputs.logits
+        probs = torch.softmax(logits, dim=-1)
+        pred_ids = torch.argmax(probs, dim=-1)
 
-            for i, pid in enumerate(pred_ids):
-                dataset_label = id2label_map.get(int(pid), str(pid))
-                emotion_name = emotion_names.get(dataset_label, dataset_label)
-                preds.append(dataset_label)
-                probs.append(float(soft[i, pid]))
+    preds = []
+    confidences = []
 
-    return preds, probs
+    for i, pid in enumerate(pred_ids):
+        label = id2label_map.get(int(pid), str(int(pid)))
+        preds.append(label)
+        confidences.append(float(probs[i, pid]))
+
+    return preds, confidences
+
+# def batch_predict(texts: List[str], tokenizer, model, id2label_map: Dict[int, str], batch_size=16):
+#     ds = Dataset.from_dict({"text": texts})
+
+#     def preprocess(batch):
+#         return tokenizer(batch["text"], truncation=True, padding="max_length")
+
+#     tokenized = ds.map(preprocess, batched=True)
+#     tokenized = tokenized.remove_columns(["text"])
+#     tokenized.set_format(type="torch", columns=["input_ids", "attention_mask"])
+
+#     # mapping from dataset label string -> emotion name
+#     emotion_names = {
+#         "0": "sadness",
+#         "1": "joy",
+#         "2": "love",
+#         "3": "anger",
+#         "4": "fear",
+#         "5": "surprise"
+#     }
+    
+#     preds, probs = [], []
+
+#     with torch.no_grad():
+#         for batch in DataLoader(tokenized, batch_size=batch_size):
+#             batch = {k: v.to(DEVICE) for k, v in batch.items()}
+#             logits = model(**batch).logits
+#             soft = torch.softmax(logits, dim=-1)
+#             pred_ids = torch.argmax(soft, dim=-1).cpu().numpy()
+
+#             for i, pid in enumerate(pred_ids):
+#                 dataset_label = id2label_map.get(int(pid), str(pid))
+#                 emotion_name = emotion_names.get(dataset_label, dataset_label)
+#                 preds.append(dataset_label)
+#                 probs.append(float(soft[i, pid]))
+
+#     return preds, probs
 
 
 # ---------------------------
@@ -355,5 +380,6 @@ st.button("Send", on_click=send_message)
 #     st.write(id2label_map)
 #     st.write(dataset_label_to_name)
 #     st.write("reply_idx:", st.session_state.reply_idx)
+
 
 
