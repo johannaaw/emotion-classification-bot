@@ -1,9 +1,7 @@
 streamlit==1.25.0
 transformers==4.35.0
-torch==2.2.0+cpu
-torchvision==0.17.0+cpu
-torchaudio==2.2.0+cpu
+torch==2.5.1+cpu
 --extra-index-url https://download.pytorch.org/whl/cpu
-datasets==2.13.1
+numpy
+datasets
 sentencepiece
-
