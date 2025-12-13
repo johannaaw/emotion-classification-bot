@@ -1,0 +1,88 @@
+{
+  "sadness": [
+    "I'm really sorry you're feeling this way, {{name}}. Want to talk about it?",
+    "That sounds really heavy. I'm here for you whenever you're ready.",
+    "It’s okay to feel sad sometimes. What do you think triggered it?",
+    "You’re not alone, {{name}}. Talking about it might help even a little.",
+    "I hear your sadness. Take your time — I'm here to listen.",
+    "If it helps, maybe try writing down what you're feeling. It can ease the weight."
+  ],
+  "joy": [
+    "That's amazing, {{name}}! I'm genuinely happy for you 🎉",
+    "Such awesome news! How did it all happen?",
+    "Sounds like something really good just happened — tell me more!",
+    "Your happiness is contagious. What made your day?",
+    "I love hearing good news from you, {{name}}!",
+    "If you can, celebrate this moment a little — you deserve it!"
+  ],
+  "love": [
+    "Love is such a warm feeling. Want to share what happened?",
+    "That sounds really heartfelt, {{name}}. I’m glad you have that.",
+    "That's beautiful — who or what made you feel that way?",
+    "Love can make the day brighter. How did this moment start?",
+    "It’s touching to hear this from you. Want to talk more about it?",
+    "Maybe express it to the person you care about — it could mean a lot."
+  ],
+  "anger": [
+    "I can sense the frustration, {{name}}. Want to let it out?",
+    "That sounds really upsetting. I’m here to help you cool down.",
+    "It’s okay to feel angry. What part made you feel the most upset?",
+    "Take a breath — you’re safe to talk about it here.",
+    "That situation sounds unfair. Want to break it down together?",
+    "Maybe stepping away for a moment could help clear your mind."
+  ],
+  "fear": [
+    "I'm sorry you're feeling scared, {{name}}. Do you want to talk about what happened?",
+    "That does sound frightening. You're not alone — I’m here with you.",
+    "Take a slow, deep breath. When you're ready, tell me what's worrying you.",
+    "Fear can feel overwhelming, but you're stronger than you think.",
+    "It’s okay to feel afraid. What part scares you the most?",
+    "Sometimes grounding yourself helps — try noticing 3 things around you."
+  ],
+  "surprise": [
+    "Whoa — that really must have caught you off guard!",
+    "Sounds like something unexpected just happened, {{name}}!",
+    "Wow, I didn’t see that coming either! How do you feel about it?",
+    "That’s quite a surprise. Want to tell me more?",
+    "Interesting! Was it a good surprise or a confusing one?",
+    "If it felt overwhelming, try taking a moment to process it."
+  ],
+  "greetings": [
+    "Hello! How are you feeling today?",
+    "Hi there! What’s on your mind?",
+    "Hey! How are you doing?",
+    "Hi! How's your day going?"
+  ],
+  "sadness_followup": [
+    "I understand. Could you tell me a bit more about what’s making you sad?",
+    "It's okay to share. How has it been affecting you lately?",
+    "Do you want to talk more about it?"
+  ],
+  "joy_followup": [
+    "That's great! What happened next?",
+    "Keep going, I love hearing good news!",
+    "Tell me more about why you're feeling happy!"
+  ],
+  "love_followup": [
+    "That’s touching. Can you tell me more?",
+    "I’d love to hear more about this feeling.",
+    "It seems important to you. Go on!"
+  ],
+  "anger_followup": [
+    "I see. What made you feel this way?",
+    "Take a deep breath. Can you tell me more?",
+    "Let’s explore this further. What happened next?"
+  ],
+  "fear_followup": [
+    "I understand your concern. Can you tell me more?",
+    "That sounds frightening. What happened exactly?",
+    "You're not alone — let's talk about it."
+  ],
+  "surprise_followup": [
+    "That’s unexpected! Can you explain what happened?",
+    "Wow, what happened?!",
+    "I didn’t see that coming either. What else happened?"
+  ]
+}
+
+
