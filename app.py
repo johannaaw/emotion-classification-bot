@@ -14,7 +14,7 @@ import re
 # Config (adjust paths here)
 # ---------------------------
 # MODEL_PATH = "models/bert_nateraw_emotion"
-MODEL_PATH = "https://drive.google.com/file/d/1xaN3GU9Sl0KCoK2B_IHGvhyXJV39HiY4/view?usp=sharing"
+MODEL_PATH = "johannaaw/bert_nateraw_emotion"
 REPLIES_PATH = "data/replies.json"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 BATCH_SIZE = 16
@@ -355,4 +355,5 @@ st.button("Send", on_click=send_message)
 #     st.write(id2label_map)
 #     st.write(dataset_label_to_name)
 #     st.write("reply_idx:", st.session_state.reply_idx)
+
 
