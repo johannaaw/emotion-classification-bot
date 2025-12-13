@@ -43,8 +43,8 @@ def normalize_id2label(raw_id2label):
 
 @st.cache_resource(show_spinner=False)
 def load_model_and_tokenizer(model_path: str):
-    tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True)
-    model = AutoModelForSequenceClassification.from_pretrained(model_path, local_files_only=True)
+    tokenizer = AutoTokenizer.from_pretrained(model_path)
+    model = AutoModelForSequenceClassification.from_pretrained(model_path)
     model.to(DEVICE)
     model.eval()
 
@@ -355,3 +355,4 @@ st.button("Send", on_click=send_message)
 #     st.write(id2label_map)
 #     st.write(dataset_label_to_name)
 #     st.write("reply_idx:", st.session_state.reply_idx)
+
